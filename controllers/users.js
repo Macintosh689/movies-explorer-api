@@ -38,9 +38,6 @@ module.exports.updateProfile = (req, res, next) => {
   const { name, email } = req.body;
   const { _id } = req.user;
   User.findByIdAndUpdate(_id, { name, email }, { new: true, runValidators: true })
-    .orFail(() => {
-      throw new NotFoundError('пользователь не найден.');
-    })
     .then((user) => {
       if (!user) {
         throw new NotFoundError('пользователь не найден.');
@@ -48,7 +45,9 @@ module.exports.updateProfile = (req, res, next) => {
       return res.send(user);
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err.code === 11000) {
+        next(new Conflict('Пользователь с таким email уже существует'));
+      } else if (err.name === 'ValidationError') {
         next(new BadRequest('переданы некорректные данные пользователя'));
       } else {
         next(err);

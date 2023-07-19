@@ -38,6 +38,9 @@ module.exports.updateProfile = (req, res, next) => {
   const { name, email } = req.body;
   const { _id } = req.user;
   User.findByIdAndUpdate(_id, { name, email }, { new: true, runValidators: true })
+    .orFail(() => {
+      throw new NotFoundError('пользователь не найден.');
+    })
     .then((user) => {
       if (!user) {
         throw new NotFoundError('пользователь не найден.');

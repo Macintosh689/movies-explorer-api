@@ -10,7 +10,7 @@ movieRouter.get('/', getMovie);
 
 movieRouter.delete('/:movieId', celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().required().hex(),
+    movieId: Joi.string().required().hex().length(24),
   })
 }), deleteMovieById);
 

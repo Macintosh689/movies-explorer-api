@@ -31,7 +31,7 @@ module.exports.deleteMovieById = (req, res, next) => {
       if (!movie.owner.equals(req.user._id)) {
         throw new Forbidden('Доступ запрещен');
       }
-      movie.deleteOne().then(() => res.send({ message: 'Фильм удалена' }))
+      movie.deleteOne().then(() => res.send({ message: 'Фильм удален' }))
         .catch((err) => next(err));
     })
     .catch((err) => {

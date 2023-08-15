@@ -3,8 +3,8 @@ const allowedCors = [
   'localhost:3000',
   'http://localhost:3000',
   'https://localhost:3000',
-  'http://moviesmacintosh689.nomoredomains.xyz',
-  'https://moviesmacintosh689.nomoredomains.xyz'
+  'http://moviesmacintosh689.nomoreparties.co',
+  'https://moviesmacintosh689.nomoreparties.co',
 ];
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
